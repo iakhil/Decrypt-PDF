@@ -22,7 +22,7 @@ def remove_pdf_password(input_pdf, output_pdf, password):
 
 # Example usage
 input_pdf = 'aadhar.pdf'     # Path to your encrypted PDF
-output_pdf = 'Akhil_Aadhar.pdf'    # Path where the decrypted PDF will be saved
-password = 'AKHI1999'      # The password for the encrypted PDF
+output_pdf = ''    # Path where the decrypted PDF will be saved
+password = ''      # The password for the encrypted PDF
 
 remove_pdf_password(input_pdf, output_pdf, password)
