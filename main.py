@@ -20,8 +20,7 @@ def remove_pdf_password(input_pdf, output_pdf, password):
         with open(output_pdf, 'wb') as output_file:
             writer.write(output_file)
 
-# Example usage
-input_pdf = 'aadhar.pdf'     # Path to your encrypted PDF
+input_pdf = ''     # Path to your encrypted PDF
 output_pdf = ''    # Path where the decrypted PDF will be saved
 password = ''      # The password for the encrypted PDF
 
