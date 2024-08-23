@@ -1,4 +1,27 @@
 import PyPDF2
+from flask import Flask, render_template, request, redirect, url_for, send_file
+import os
+
+app = Flask(__name__)
+
+
+@app.route('/')
+def upload_form():
+    return render_template('upload.html')
+
+@app.route('/upload', methods=['POST'])
+
+def upload_file():
+    file = request.files['file']
+    password = request.files['password']
+
+    filename = file.filename
+    file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    file.save(file_path)
+
+    file_path = remove_pdf_password(file_path, f"decrypted_{filename}", password)
+
+    return send_file(file_path, as_attachment=True)
 
 def remove_pdf_password(input_pdf, output_pdf, password):
     # Open the encrypted PDF
@@ -20,8 +43,8 @@ def remove_pdf_password(input_pdf, output_pdf, password):
         with open(output_pdf, 'wb') as output_file:
             writer.write(output_file)
 
-input_pdf = ''     # Path to your encrypted PDF
-output_pdf = ''    # Path where the decrypted PDF will be saved
-password = ''      # The password for the encrypted PDF
+    curr_path = os.getcwd()
+    return curr_path + "output_pdf.pdf"
 
-remove_pdf_password(input_pdf, output_pdf, password)
+if __name__ == '__main__':
+    app.run(debug=True)
